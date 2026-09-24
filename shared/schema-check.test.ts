@@ -97,4 +97,24 @@ describe("schema-check: verificação do script do aluno", () => {
       await db.close();
     }
   });
+
+  it("script correto com um comentário '-- ...' logo antes do SELECT ainda passa a checklist do JOIN", async () => {
+    // regressão: um comentário como "-- 3) Consultar com JOIN" na linha antes do
+    // SELECT fazia a checklist marcar "falso" mesmo com o SELECT...JOIN certinho.
+    const db = new PGlite();
+    try {
+      const script = `${ddlTema(tema)}
+        ${insertsExemploTema(tema)}
+        -- 3) Consultar com JOIN
+        SELECT f.id_${tema.tabelaFilha} AS id, f.${tema.colunaItem} AS item, p.nome AS relacionado
+        FROM ${tema.tabelaFilha} f
+        JOIN ${tema.tabelaPai} p ON f.id_${tema.tabelaPai} = p.id_${tema.tabelaPai};
+      `;
+      const r = await verificarScriptAluno(db, tema, script);
+      expect(r.checklist.find((i) => i.chave === "selectComJoin")?.ok).toBe(true);
+      expect(r.ok).toBe(true);
+    } finally {
+      await db.close();
+    }
+  });
 });

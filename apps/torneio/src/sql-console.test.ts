@@ -34,6 +34,11 @@ describe("motor do console psql", () => {
     expect(comandoBloqueadoDDL("INSERT INTO x VALUES (1);")).toBe(false);
   });
 
+  it("bloqueia DDL mesmo com um comentário antes do comando", () => {
+    expect(comandoBloqueadoDDL("-- vou criar a tabela\nCREATE TABLE x (id INT);")).toBe(true);
+    expect(comandoBloqueadoDDL("/* apaga */ DROP TABLE x;")).toBe(true);
+  });
+
   it("formata tabela ASCII no estilo psql com (N rows)", () => {
     const saida = formatarTabelaPsql(
       [

@@ -2,6 +2,7 @@
  * Motor do console estilo psql: separação de comandos, bloqueio de DDL,
  * formatação de resultado em tabela ASCII e de erros. Sem DOM (fácil de testar).
  */
+import { removerComentariosSql } from "../../../shared/sql-split";
 
 export interface CampoResultado {
   name: string;
@@ -25,10 +26,10 @@ const PALAVRAS_DDL_BLOQUEADAS = /^\s*(create|drop|alter|truncate)\b/i;
 
 /** true se o comando (já terminado em ";") é um DDL que o console deve recusar. */
 export function comandoBloqueadoDDL(comando: string): boolean {
-  return PALAVRAS_DDL_BLOQUEADAS.test(comando);
+  return PALAVRAS_DDL_BLOQUEADAS.test(removerComentariosSql(comando));
 }
 
-export { dividirEmComandos } from "../../../shared/sql-split";
+export { dividirEmComandos, removerComentariosSql } from "../../../shared/sql-split";
 
 const OIDS_NUMERICOS = new Set([20, 21, 23, 700, 701, 1700]);
 

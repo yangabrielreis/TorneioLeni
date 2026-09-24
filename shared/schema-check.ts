@@ -3,7 +3,7 @@
  * information_schema. As mensagens nunca revelam os nomes esperados de
  * tabelas/colunas (o enunciado é só impresso, de propósito).
  */
-import { dividirEmComandos } from "./sql-split";
+import { dividirEmComandos, removerComentariosSql } from "./sql-split";
 import type { Tema } from "./themes";
 
 export interface CampoResultado {
@@ -89,7 +89,10 @@ async function contarLinhas(db: ClienteSql, tabela: string): Promise<number> {
 
 function temSelectComJoin(script: string): boolean {
   const { completos } = dividirEmComandos(script);
-  return completos.some((c) => /^\s*select\b/i.test(c) && /\bjoin\b/i.test(c));
+  return completos.some((c) => {
+    const semComentarios = removerComentariosSql(c).trim();
+    return /^select\b/i.test(semComentarios) && /\bjoin\b/i.test(semComentarios);
+  });
 }
 
 export async function verificarScriptAluno(db: ClienteSql, tema: Tema, script: string): Promise<ResultadoVerificacao> {
