@@ -1,0 +1,292 @@
+:root {
+  --bg: #0b1220;
+  --bg-painel: #131c2e;
+  --bg-card: #1a2540;
+  --borda: #30436b;
+  --texto: #f2f5fb;
+  --texto-fraco: #9fb0d0;
+  --acento: #4ea1ff;
+  --sucesso: #35d07f;
+  --erro: #ff6b6b;
+  --aviso: #ffca4a;
+  font-size: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--texto);
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  background: var(--bg-card);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 0.6em 1.2em;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--acento);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+button.primario {
+  background: var(--acento);
+  color: #04101f;
+  border-color: var(--acento);
+  font-weight: 700;
+}
+
+button.perigo {
+  border-color: var(--erro);
+  color: var(--erro);
+}
+
+select,
+input[type="text"],
+input[type="password"] {
+  font: inherit;
+  background: var(--bg-painel);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  padding: 0.6em 0.8em;
+  width: 100%;
+}
+
+textarea {
+  font-family: "Cascadia Code", "Fira Code", Consolas, monospace;
+  font-size: 1rem;
+  background: #05070c;
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 1em;
+  width: 100%;
+  resize: vertical;
+}
+
+.topo {
+  padding: 1em 1.25em;
+  background: var(--bg-painel);
+  border-bottom: 1px solid var(--borda);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.topo h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.conteudo {
+  flex: 1;
+  padding: 1.5em;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.caixa-login {
+  max-width: 420px;
+  margin: 4em auto;
+  background: var(--bg-painel);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 2em;
+}
+
+.caixa-login h1 {
+  margin-top: 0;
+  font-size: 1.4rem;
+}
+
+.campo {
+  margin-bottom: 1.2em;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 0.4em;
+  color: var(--texto-fraco);
+}
+
+.mensagem-erro {
+  color: var(--erro);
+  margin-top: 0.8em;
+}
+
+.mensagem-sucesso {
+  color: var(--sucesso);
+  margin-top: 0.8em;
+}
+
+.campo-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.painel-resultado {
+  background: var(--bg-painel);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 1.2em;
+  margin-top: 1.2em;
+}
+
+.painel-resultado h3 {
+  margin-top: 0;
+  font-size: 1rem;
+  color: var(--texto-fraco);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.erro-postgres {
+  background: rgba(255, 107, 107, 0.12);
+  border: 1px solid var(--erro);
+  border-radius: 8px;
+  padding: 0.8em 1em;
+  font-family: "Cascadia Code", "Fira Code", Consolas, monospace;
+  white-space: pre-wrap;
+  margin-bottom: 1em;
+}
+
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.checklist li {
+  display: flex;
+  gap: 0.6em;
+  align-items: flex-start;
+  padding: 0.4em 0;
+}
+
+.checklist .marca {
+  font-weight: 700;
+}
+
+.checklist .ok {
+  color: var(--sucesso);
+}
+
+.checklist .falta {
+  color: var(--erro);
+}
+
+.mensagens-ajuda {
+  margin-top: 0.8em;
+  color: var(--aviso);
+  font-size: 0.9rem;
+}
+
+table.resultado {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 0.8em;
+  font-family: "Cascadia Code", "Fira Code", Consolas, monospace;
+  font-size: 0.9rem;
+}
+
+table.resultado th,
+table.resultado td {
+  border: 1px solid var(--borda);
+  padding: 0.4em 0.6em;
+  text-align: left;
+}
+
+table.resultado th {
+  background: var(--bg-card);
+}
+
+.linha-acoes {
+  display: flex;
+  gap: 0.8em;
+  margin-top: 1em;
+  flex-wrap: wrap;
+}
+
+.aviso-caixa {
+  background: rgba(255, 202, 74, 0.12);
+  border: 1px solid var(--aviso);
+  border-radius: 8px;
+  padding: 0.8em 1em;
+  margin-bottom: 1em;
+  color: var(--aviso);
+}
+
+.tabela-equipes {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+
+.tabela-equipes th,
+.tabela-equipes td {
+  border-bottom: 1px solid var(--borda);
+  padding: 0.6em;
+  text-align: left;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2em 0.6em;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.badge.nao-enviou {
+  background: rgba(159, 176, 208, 0.2);
+  color: var(--texto-fraco);
+}
+
+.badge.enviou-ok {
+  background: rgba(53, 208, 127, 0.2);
+  color: var(--sucesso);
+}
+
+.badge.enviou-erro {
+  background: rgba(255, 107, 107, 0.2);
+  color: var(--erro);
+}
+
+pre.sql-texto {
+  background: #05070c;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 1em;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: "Cascadia Code", "Fira Code", Consolas, monospace;
+}

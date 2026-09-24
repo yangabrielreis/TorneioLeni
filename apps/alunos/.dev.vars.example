@@ -1,0 +1,12 @@
+# Copie para .dev.vars (fica de fora do git) para rodar `npm run alunos:pages` localmente.
+# Em produção, esses mesmos nomes viram "secrets" configurados no painel da Cloudflare
+# (ou via `wrangler pages secret put`), nunca commitados.
+
+# JSON com { "Nome da Equipe": "senha", ... }, chaves iguais aos nomes em shared/themes.ts
+SENHAS_EQUIPES={}
+
+# Senha do painel /admin (diferente das senhas de equipe)
+ADMIN_SENHA=
+
+# Segredo para assinar o token de sessão (string longa e aleatória)
+TOKEN_SEGREDO=

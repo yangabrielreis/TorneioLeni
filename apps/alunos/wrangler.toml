@@ -1,0 +1,11 @@
+name = "torneio-bd-alunos"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Namespace KV usado para senhas/tentativas/envios dos alunos.
+# O "id" abaixo é um placeholder: antes de publicar, crie o namespace real
+# (`wrangler kv namespace create TORNEIO_KV`) e troque o id aqui (veja o README).
+[[kv_namespaces]]
+binding = "TORNEIO_KV"
+id = "troque_pelo_id_real_da_kv_antes_de_publicar"

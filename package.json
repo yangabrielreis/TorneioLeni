@@ -1,0 +1,24 @@
+{
+  "name": "torneio-bd",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/torneio",
+    "apps/alunos"
+  ],
+  "scripts": {
+    "torneio": "npm run dev -w apps/torneio",
+    "alunos": "npm run dev -w apps/alunos",
+    "alunos:pages": "npm run pages:dev -w apps/alunos",
+    "build": "npm run build -w apps/torneio && npm run build -w apps/alunos",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0",
+    "vitest": "^2.1.0"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.8"
+  }
+}
