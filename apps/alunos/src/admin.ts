@@ -84,6 +84,7 @@ async function renderizarPainel(): Promise<void> {
       <h1>Painel do professor</h1>
       <div class="linha-acoes">
         <button id="botao-zip">Baixar todos (.zip)</button>
+        <button id="botao-limpar" class="perigo">Limpar todos os envios</button>
         <button data-action="sair">Sair</button>
       </div>
     </div>
@@ -111,6 +112,17 @@ async function renderizarPainel(): Promise<void> {
     a.download = "envios-torneio-bd.zip";
     a.click();
     URL.revokeObjectURL(url);
+  });
+
+  document.getElementById("botao-limpar")!.addEventListener("click", async () => {
+    if (!confirm("Isso apaga TODOS os envios (e o histórico) de todas as equipes. Não pode ser desfeito. Continuar?")) return;
+    const r = await fetch("/admin/limpar", { method: "POST", headers: { Authorization: `Bearer ${token()}` } });
+    if (!r.ok) {
+      alert("Não foi possível limpar os envios.");
+      return;
+    }
+    document.getElementById("area-detalhe")!.innerHTML = "";
+    renderizarPainel();
   });
 
   try {
