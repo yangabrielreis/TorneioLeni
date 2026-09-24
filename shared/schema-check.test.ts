@@ -117,4 +117,37 @@ describe("schema-check: verificação do script do aluno", () => {
       await db.close();
     }
   });
+
+  it("linhas em branco antes, entre e dentro dos comandos não atrapalham a checklist", async () => {
+    const db = new PGlite();
+    try {
+      const script = `
+
+
+        ${ddlTema(tema)}
+
+
+        ${insertsExemploTema(tema)}
+
+
+        -- consulta final
+
+
+        SELECT f.id_${tema.tabelaFilha} AS id,
+               f.${tema.colunaItem} AS item
+
+        FROM ${tema.tabelaFilha} f
+
+        JOIN ${tema.tabelaPai} p
+          ON f.id_${tema.tabelaPai} = p.id_${tema.tabelaPai};
+
+
+      `;
+      const r = await verificarScriptAluno(db, tema, script);
+      expect(r.ok).toBe(true);
+      expect(r.checklist.every((i) => i.ok)).toBe(true);
+    } finally {
+      await db.close();
+    }
+  });
 });
