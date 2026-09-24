@@ -8,4 +8,4 @@ compatibility_flags = ["nodejs_compat"]
 # (`wrangler kv namespace create TORNEIO_KV`) e troque o id aqui (veja o README).
 [[kv_namespaces]]
 binding = "TORNEIO_KV"
-id = "troque_pelo_id_real_da_kv_antes_de_publicar"
+id = "be50f23b50cf4c48bc26b0f6c0d3e447"
